@@ -6,123 +6,39 @@
   <title>Application Portal</title>
   <meta name="description" content="Seamless Mobile Responsive Web Application">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { width: 100%; height: 100%; overflow: hidden; }
+    iframe { width: 100%; height: 100%; border: none; }
+    .external-fullscreen {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        background: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(4px);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        font-size: 10px;
+        cursor: pointer;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
     }
-    /* Hide scrollbars across all browsers while keeping screen fitted */
-    html, body {
-      width: 100%;
-      height: 100%;
-      height: 100dvh;
-      margin: 0;
-      padding: 0;
-      overflow: hidden !important;
-      scrollbar-width: none !important;
-      -ms-overflow-style: none !important;
-      background-color: #0f172a;
-      -webkit-font-smoothing: antialiased;
-    }
-    html::-webkit-scrollbar, body::-webkit-scrollbar, #frame-wrapper::-webkit-scrollbar, iframe::-webkit-scrollbar {
-      display: none !important;
-      width: 0 !important;
-      height: 0 !important;
-    }
-    #frame-wrapper {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden !important;
-      scrollbar-width: none !important;
-      -ms-overflow-style: none !important;
-      -webkit-overflow-scrolling: touch;
-    }
-    #app-frame {
-      width: 100%;
-      height: 100%;
-      min-width: 100%;
-      min-height: 100%;
-      border: 0 !important;
-      outline: none !important;
-      display: block;
-      overflow: hidden !important;
-      scrollbar-width: none !important;
-      -ms-overflow-style: none !important;
-    }
-    .splash-logo-img { max-height: 64px; width: auto; }
-    #splash-screen {
+    .external-fullscreen:hover { background: #007bff; transform: scale(1.05); }
+    /* Temporary overlay to capture first click on iframe area */
+    .click-capture-overlay {
       position: fixed;
-      inset: 0;
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #94a3b8;
-      gap: 16px;
-      z-index: 100;
-      animation: splash-in 0.5s ease forwards;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      pointer-events: auto;
-    }
-    #splash-screen.exiting {
-      opacity: 0;
-      transform: translateY(-30px);
-      pointer-events: none;
-    }
-    .splash-subtitle {
-      font-family: Inter, Segoe UI, Arial, sans-serif;
-      font-size: clamp(11px, 2.5vw, 14px);
-      color: #64748b;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .splash-spinner {
-      width: 40px;
-      height: 40px;
-      margin-top: 12px;
-      position: relative;
-    }
-    .splash-spinner::before,
-    .splash-spinner::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 3px solid rgba(255, 255, 255, 0.08);
-    }
-    .splash-spinner::before {
-      border-top-color: #38bdf8;
-      animation: spin 0.8s linear infinite;
-    }
-    .splash-spinner::after {
-      border: 3px solid rgba(255, 255, 255, 0.05);
-      border-bottom-color: #64748b;
-      animation: spin 1.4s linear infinite reverse;
-    }
-    .splash-status {
-      font-family: Inter, Segoe UI, Arial, sans-serif;
-      font-size: 13px;
-      color: #64748b;
-      margin-top: 4px;
-      min-height: 18px;
-      transition: opacity 0.3s ease;
-    }
-    @keyframes splash-in {
-      from {
-        opacity: 0;
-        transform: scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      z-index: 10000;
+      cursor: pointer;
     }
   </style>
 </head>
